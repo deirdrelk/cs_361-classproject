@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Internal Movie Deirdre-Base {% endblock %}</h1>
+    <p>Check out all the films you've watched! Time to add another to the collection?</p>
+    <style>
+        table,th,
+        td {
+        border: 1px solid black;
+        }
+    </style>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Director</th>
+                <th>Rating</th>
+                <th>Review</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        {% for movie in movies %}
+        <tbody>
+            <tr>
+                <td>{{movie['title']}}</td>
+                <td>{{movie['year']}}</td>
+                <td>{{movie['director']}}</td>
+                <td>{{movie['rating']}}</td>
+                <td>{{movie['review']}}</td>
+                <td>
+                    <form method="PUT" action="{{movie['_id']}}/edit" >
+                        <input type="submit" value="Edit"
+                        onclick="">
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" action="{{movie['_id']}}/delete" >
+                        <input type="submit" value="Delete"
+                           onclick="confirm('Are you sure you want to delete this movie?')">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+{% endblock %}
