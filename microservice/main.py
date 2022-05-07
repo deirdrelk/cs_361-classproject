@@ -6,7 +6,7 @@
 # deployed with GCP https://cs361-microservice-spring22.uw.r.appspot.com/get_cik/<ticker_id_here>
 
 from urllib.request import urlopen
-from flask import Flask, render_template, abort 
+from flask import Flask, abort 
 import json
 
 app = Flask(__name__)
