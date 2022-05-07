@@ -24,3 +24,8 @@ def get_cik(company):
     response_dict = {"url": response}
     json_object = json.dumps(response_dict, indent=4)
     return json_object, 200
+
+if __name__ == "__main__":
+
+    #Start the app on port 5000, it will be different once hosted
+    app.run(port=5000, debug=True)
