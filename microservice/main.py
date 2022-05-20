@@ -21,7 +21,7 @@ def get_cik(company):
             decoded_line = line.decode('utf-8')
             ticker, cik = decoded_line.strip().split('\t', 1)
             new_dict[ticker] = cik.strip()
-            CIK_to_append = new_dict.get(company)
+            CIK_to_append = new_dict.get(company.lower())
         if CIK_to_append:
             try:
                 response = f"https://www.sec.gov/edgar/browse/?CIK={CIK_to_append}&owner=exclude"
