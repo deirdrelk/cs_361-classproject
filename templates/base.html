@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} {% endblock %} - FlaskApp</title>
+    <title>{% block title %} Internal Movie Deirdre-Base {% endblock %} - FlaskApp</title>
     <style>
         .message {
             padding: 10px;
@@ -10,18 +11,35 @@
             background-color: #f3f3f3
         }
         nav a {
-            color: #d64161;
+            color: #b341d6;
             font-size: 2em;
             margin-left: 50px;
             text-decoration: none;
         }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        img.logo {
+            align-self: center;
+            max-width: 10%;
+        }
 
     </style>
+    <h1>Internal Movie Deirdre-Base</h1>
+    <a href='/'><img alt="Camera logo" class="logo" src="{{url_for('static', filename='cameraimage.png')}}"/></a>
+    <p><strong>Check out all the films you've watched! Time to add another to the collection?</strong></p>
 </head>
 <body>
     <nav>
         <a href='/'>See Full List</a>
         <a href='/add'>Add New Film</a>
+        <a href='/about'>About</a>
+        <a href='/generate'>Generate a Movie</a>
     </nav>
     <hr>
     <div class="content">

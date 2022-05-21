@@ -4,25 +4,19 @@
     <h1>{% block title %} Add a New Movie {% endblock %}</h1>
     <form method="POST">
         <label for="title">Title</label>
-        <br>
         <input type="text" name="title"
             placeholder="Film title"
             value="{{ request.form['title'] }}"></input>
-        <br>
         <label for="year">Year</label>
-        <br>
         <input type="number" name="year" min=1920 max=2022
             placeholder="Year"
             value="{{ request.form['year'] }}"></input>
-        <br>
         <label for="director">Director</label>
-        <br>
         <input type="text" name="director"
             placeholder="Director's Name"
             value="{{ request.form['director'] }}"></input>
         <br>
         <label for="rating">Rating</label>
-        <br>
         <input type="number" name="rating"
             placeholder="Number: 1-10"
             value="{{ request.form['rating'] }}"></input>
@@ -36,5 +30,6 @@
                 >{{ request.form['review'] }}</textarea>
         <br>
         <button type="submit">Add Film</button>
+        <button @click="/">Cancel</button>
     </form>
 {% endblock %}
