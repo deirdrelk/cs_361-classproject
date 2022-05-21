@@ -1,13 +1,12 @@
-from crypt import methods
 from urllib.parse import quote
+from flask import Flask, render_template, request, redirect
 import requests
-from flask import Flask, render_template, request, redirect, Response
 from random import randint
 from pymongo import MongoClient
 import certifi
 from bson.objectid import ObjectId
 
-cluster = MongoClient('mongodb+srv://dlyonskeefe:BoN8xaXS9TcIUsuY@cs290.8hbfp.mongodb.net/CS290?retryWrites=true&w=majority', tlsCAFile=certifi.where())
+cluster = MongoClient('mongodb+srv://dlyonskeefe:XXXXXXXY@cs290.8hbfp.mongodb.net/CS290?retryWrites=true&w=majority', tlsCAFile=certifi.where())
 db = cluster['CS290']
 collection = db['movies']
 
