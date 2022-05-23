@@ -5,13 +5,16 @@ from random import randint
 from pymongo import MongoClient
 import certifi
 from bson.objectid import ObjectId
+from dotenv import dotenv_values
 
-cluster = MongoClient('mongodb+srv://dlyonskeefe:XXXXXXXY@cs290.8hbfp.mongodb.net/CS290?retryWrites=true&w=majority', tlsCAFile=certifi.where())
+mongo_config = dotenv_values('.env')
+mongo_url = mongo_config.get('MONGO_SERVER_URI')
+
+cluster = MongoClient(mongo_url, tlsCAFile=certifi.where())
 db = cluster['CS290']
 collection = db['movies']
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '31dd0d2e46ad1a9e9e8c6fb34ad59863690737de29405bbf'
 
 # homepage route, gets all films in the DB and displays them along with navigation and short intro blurb
 @app.route('/', methods=['GET'])
