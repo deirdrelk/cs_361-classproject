@@ -29,15 +29,25 @@
                 <td>{{movie['review']}}</td>
                 <td>
                     <form method="PUT" action="{{movie['_id']}}/edit" >
-                        <input type="image" value="submit" src="{{url_for('static', filename='352547_edit_mode_icon.svg')}}" id="image" value="Edit"
+                        <input type="image" value="submit" src="{{url_for('static', filename='/images/352547_edit_mode_icon.svg')}}" id="image" value="Edit"
                         onclick="">
                     </form>
                 </td>
                 <td>
-                    <form method="DELETE" action="{{movie['_id']}}/delete" >
-                        <input type="submit" id="delete-submit" value=""
-                        style="background-image: url('/static/352303_delete_icon.svg'); background-color: #FFFFFF; border: solid 0px #000000; width: 50px; height: 50px;" 
-                        onclick="confirm('Are you sure you want to delete this movie?')"/>
+                    <form id="delete_form">
+                        <script>
+                            async function deletesubmit(id) {
+                                try {
+                                    await fetch(`${id}/delete`, { method: 'DELETE'})
+                                        .then(response => response.ok ? window.location.pathname = '/' : undefined)
+                                } catch(e) {
+                                    console.log(e)
+                                }
+                            }
+                        </script>
+                        <input type="button"  id="delete-submit" value={{movie['_id']}}
+                        style="background-image: url('/static/images/352303_delete_icon.svg'); background-color: #FFFFFF; border: solid 0px #000000; width: 50px; height: 50px; color: transparent;" 
+                        onclick="confirm('Are you sure you want to delete this movie?') ? deletesubmit(value) : undefined"/>
                     </form>
                 </td>
             </tr>

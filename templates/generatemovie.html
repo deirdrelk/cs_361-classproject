@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div id="block-title-about" hidden>{% block title %} Generating movie ... {% endblock %}</div>
 <style>
     body {
     margin-left: 3%;
@@ -8,11 +9,14 @@
     }
 </style>
 <div>
-    <h2>And the winner of the randomly generated movie title is ... </h2>
+    <h2>And the winner of the randomly generated movie title is ...</h2>
     <img src="https://media.giphy.com/media/26gsf3YejgPfbLvig/giphy.gif" >
     <br>
-    <p><strong>Film Title:</strong> {{movie['title']}} </p> 
-    <p><strong>Film Director:</strong> {{movie['director']}} </p>
-    <p><strong>Release Year:</strong> {{movie['year']}} </p>
+    <p><strong>Film Title:</strong> {{movie['title']}} <br><br>
+    <strong>Film Director:</strong> {{movie['director']}} <br><br>
+    <strong>Release Year:</strong> {{movie['year']}} </p>
+    <h3>Do you want to add this film to your watch list?</h3>
+    <button>Yes</button>
+    <button>No</button>
 </div>
 {% endblock %}

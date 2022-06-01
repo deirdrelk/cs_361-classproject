@@ -30,24 +30,24 @@ def add_movie():
         year = request.form['year']
         director = request.form['director']
         rating = request.form['rating']
+        date_watched = request.form['date_watched']
         review = request.form['review']
-        collection.insert_one({"title": title, "year": year, "director": director, "rating": rating, "review": review})
+        collection.insert_one({"title": title, "year": year, "director": director, "rating": rating, "date_watched": date_watched, "review": review})
         return redirect('/')
     return render_template("add_movie.html")
 
+# route to about page
 @app.route('/about', methods=['GET'])
 def get_about_page():
     return render_template('about.html')
 
-@app.route('/<id>/delete', methods=['DELETE', 'GET'])
+# route to delete - called in index.html
+@app.route('/<id>/delete', methods=['DELETE'])
 def delete(id):
     collection.delete_one({"_id": ObjectId(id)})
-    return redirect('/success')
+    return get_home_page()
 
-@app.route('/success', methods = ['GET'])
-def get_success_page():
-    return render_template('success.html')
-
+# update a film
 @app.route('/<id>/edit', methods=['GET', 'POST'])
 def edit(id):
     movie = collection.find_one({"_id": ObjectId(id)})
@@ -56,22 +56,25 @@ def edit(id):
         year = request.form['year']
         director = request.form['director']
         rating = request.form['rating']
+        date_watched = request.form['date_watched']
         review = request.form['review']
-        collection.find_one_and_update({"_id": ObjectId(id)}, { "$set": {"title": title, "year": year, "director": director, "rating": rating, "review": review}})
+        collection.find_one_and_update({"_id": ObjectId(id)}, { "$set": {"title": title, "year": year, "director": director, "rating": rating, "date_watched": date_watched, "review": review}})
         return redirect('/')
     return render_template('edit_movie.html', movie = movie)
 
+# generate a random movie by calling microservice
 @app.route('/generate', methods=['GET', 'POST'])
 def generate_random_movie():
     random_titles_array = ['Jurassic Park', 'Robocop', 'Tootsie', 'North by Northwest', 'Volver', 'Young Frankenstein', 'Babe', 'Scream', 'Rear Window']
     movie_pick = quote(random_titles_array[randint(0,8)])
     movie_api_url = f'https://us-central1-atlantean-bebop-349722.cloudfunctions.net/info?title={movie_pick}'
-    response = requests.get(movie_api_url)
+    headers = {'Accept': 'application/json'}
+    response = requests.get(movie_api_url, headers=headers)
     data = response.json()
     if data.get('status') == 'Success':
         return render_template('generatemovie.html', movie = data)
 
 if __name__ == "__main__":
 
-    #Start the app on port 3000, it will be different once hosted
+    #Start the app on port 5000, it will be different once hosted
     app.run(port=5000, debug=True)

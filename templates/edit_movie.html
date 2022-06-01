@@ -1,46 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Add a New Movie {% endblock %}</h1>    
+    <h2>{% block title %} Update This Movie {% endblock %}</h2>    
     <form method="POST">
         <label for="title">Title</label>
-        <br>
-        <input type="text" name="title"
-            placeholder="{{movie['title']}}"
-            value="{{request.form['title'] }}">
-        </input>
-        <br>
+            <input type="text" name="title" value="{{movie['title']}}"></input>
         <label for="year">Year</label>
-        <br>
-        <input type="number" name="year" min=1920 max=2022
-            placeholder="{{movie['year']}}"
-            value="{{ request.form['year'] }}">
-        </input>
-        <br>
+            <input type="number" name="year" min=1900 max=2022 value={{movie['year']}}></input>
         <label for="director">Director</label>
-        <br>
-        <input type="text" name="director"
-            placeholder="{{movie['director']}}"
-            value="{{ request.form['director'] }}">
-        </input>
+            <input type="text" name="director" value="{{movie['director']}}"></input>
         <br>
         <label for="rating">Rating</label>
-        <br>
-        <input type="number" name="rating"
-            placeholder="{{movie['rating']}}"
-            value="{{ request.form['rating'] }}">
-        </input>
+            <input type="number" name="rating" value={{movie['rating']}}></input>
+        <label for="date_watched">Date Watched</label>
+            <input type="date" name="date_watched" value="{{ request.form['date_watched'] }}" required>
         <br>
         <label for="review">Review</label>
         <br>
-        <textarea name="review"
-                placeholder="{{movie['review']}}"
-                rows="10"
-                cols="40"
-                >{{ request.form['review'] }}
-        </textarea>
+        <textarea name="review" rows="10" cols="40">{{movie['review']}}</textarea>
         <br>
-        <button type="submit">Add Film</button>
-        <button @click="/">Cancel</button>
+        <button type="submit">Update Film</button>
+        <a href='/' type="button">Back -></a>
     </form>
 {% endblock %}

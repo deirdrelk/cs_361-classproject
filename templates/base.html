@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} Internal Movie Deirdre-Base {% endblock %} - FlaskApp</title>
+    <title>{% block title %} IMDeirdreB {% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
     <style>
         .message {
             padding: 10px;
@@ -31,7 +32,7 @@
 
     </style>
     <h1>Internal Movie Deirdre-Base</h1>
-    <a href='/'><img alt="Camera logo" class="logo" src="{{url_for('static', filename='cameraimage.png')}}"/></a>
+    <a href='/'><img alt="Camera logo" class="logo" src="{{url_for('static', filename='images/cameraimage.png')}}"/></a>
     <p><strong>Check out all the films you've watched! Time to add another to the collection?</strong></p>
 </head>
 <body>
