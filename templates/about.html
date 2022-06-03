@@ -7,15 +7,19 @@
     margin-left: 3%;
     margin-right: 3%;
     }
+    #about li {
+        font-size: 1.25em;
+    }
 </style>
-<div>
-    <img src="https://media.giphy.com/media/Umw00qZTgLxO99wYMy/giphy.gif" >
-    <br>
+<div id="about">
     <h2>
         Use this Flask web-application built with MongoDB and the PyMongo driver to keep track of the films you watch. 
     </h2>
-    <p><strong>Full List:</strong> View all films, edit films and delete films.</p> 
-    <p><strong>Add New Film:</strong> Add a new film title, director, release year, rating and review.</p>
-    <p><strong>Suggest a Film:</strong> Can't decide what to watch? Let this generate a suggestion (or two).</p>
+    <img src="https://media.giphy.com/media/Umw00qZTgLxO99wYMy/giphy.gif" >
+    <p>
+        <li><strong>Full List:</strong> View all movies. Sort by watch date, year released and personal rating.</li>
+        <li><strong>Add New Movie:</strong> Add a new movie title, director, release year, rating, watch date and review.</li>
+        <li><strong>Suggest a Movie:</strong> Can't decide what to watch? Let this generate a suggestion (or two).</li>
+    </p>
 </div>
 {% endblock %}

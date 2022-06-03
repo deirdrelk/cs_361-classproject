@@ -6,8 +6,25 @@
         td {
         border: 1px solid black;
         }
+        #sort_options {
+            font-size: 1.25em;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;  
+        }
+        #sort_options a {
+            color: #bdac1a;
+            margin-left: 50px;
+            text-decoration: none;
+        }
     </style>
-    <table>
+    <div id ='sort_options' style="margin: 1%; padding: 1%;">
+        Sort by:
+        <a href='/date_watched/archives'>Watch Date</a>
+        <a href='/year/archives'>Release Year</a>
+        <a href='/rating/archives'>User Rating</a>
+    </div>
+    <table style="align-self: center;">
         <thead>
             <tr>
                 <th>Title</th>
@@ -53,4 +70,8 @@
             </tr>
         </tbody>
         {% endfor %}
+    </table>
+        <div>
+            * Currently sorted by date movie was submitted to IMDeirdreB *
+        </div>
 {% endblock %}

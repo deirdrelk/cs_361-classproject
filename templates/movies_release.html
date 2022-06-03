@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        table,th,
+        td {
+        border: 1px solid black;
+        height: 50px
+        }
+        a {
+            font-size: 1.25em;
+            color: #bdac1a;
+            text-decoration: none;
+        }
+    </style>
+    <a href="/">Back to all</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Release Year</th>
+                <th>Watch Date</th>
+                <th>Title</th>
+                <th>Director</th>
+                <th>Rating</th>
+                <th>Review</th>
+            </tr>
+        </thead>
+        {% for movie in movie %}
+        <tbody>
+            <tr>
+                <td>{{movie['year']}}</td>
+                <td>{{movie['date_watched']}}</td>
+                <td>{{movie['title']}}</td>
+                <td>{{movie['director']}}</td>
+                <td>{{movie['rating']}}</td>
+                <td>{{movie['review']}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+{% endblock %}
