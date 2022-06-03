@@ -45,7 +45,7 @@
                 <td>{{movie['rating']}}</td>
                 <td>{{movie['review']}}</td>
                 <td>
-                    <form method="PUT" action="{{movie['_id']}}/edit" >
+                    <form method="PUT" action="/edit/{{movie['_id']}}" >
                         <input type="image" value="submit" src="{{url_for('static', filename='/images/352547_edit_mode_icon.svg')}}" id="image" value="Edit"
                         onclick="">
                     </form>
@@ -55,7 +55,7 @@
                         <script>
                             async function deletesubmit(id) {
                                 try {
-                                    await fetch(`${id}/delete`, { method: 'DELETE'})
+                                    await fetch(`/delete/${id}`, { method: 'DELETE'})
                                         .then(response => response.ok ? window.location.pathname = '/' : undefined)
                                 } catch(e) {
                                     console.log(e)

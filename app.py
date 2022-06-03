@@ -16,13 +16,19 @@ collection = db['movies']
 
 app = Flask(__name__)
 
-# homepage route, gets all films in the DB and displays them along with navigation and short intro blurb
+"""
+Homepage route
+Gets all films in the DB and displays them along with main nav.
+Also offers options for different views and sorts of the film.
+"""
 @app.route('/', methods = ['GET'])
 def get_home_page():
     all_movies = collection.find()
     return render_template('index.html', movies = all_movies)
 
-# route to add new movie form
+"""
+Add new film. Takes request data and uses it with insert_one Pymongo operation
+"""
 @app.route('/add', methods = ['GET','POST'])
 def add_movie():
     if request.method == 'POST':
@@ -36,19 +42,27 @@ def add_movie():
         return redirect('/')
     return render_template("add_movie.html")
 
-# route to about page
+"""
+Renders About page.
+"""
 @app.route('/about', methods = ['GET'])
 def get_about_page():
     return render_template('about.html')
 
-# route to delete - called in index.html
-@app.route('/<id>/delete', methods = ['DELETE'])
+"""
+Route that calls delete_one operation in DB. 
+"""
+@app.route('/delete/<id>', methods = ['DELETE'])
 def delete(id):
     collection.delete_one({"_id": ObjectId(id)})
     return get_home_page()
 
-# update a film
-@app.route('/<id>/edit', methods = ['GET', 'POST'])
+"""
+This route performs two DB operations: 
+gets the movie to update by ID, and then posts updates to the particular film. 
+Renders the edit movie template.
+"""
+@app.route('/edit/<id>', methods = ['GET', 'POST'])
 def edit(id):
     movie = collection.find_one({"_id": ObjectId(id)})
     if request.method == 'POST':
@@ -62,7 +76,11 @@ def edit(id):
         return redirect('/')
     return render_template('edit_movie.html', movie = movie)
 
-# generate a random movie by calling microservice
+""" 
+This route calls my teammate's microservice. 
+It generates a random movie which is then displayed on the generate movie template.
+No DB operations are performed here.
+"""
 @app.route('/generate', methods = ['GET'])
 def generate_random_movie():
     if request.method == 'GET':
@@ -75,7 +93,10 @@ def generate_random_movie():
         if data.get('status') == 'Success':
             return render_template('generatemovie.html', movie = data)
 
-# filter films by year watched
+"""
+This route generates different sort templates depending on what the user chooses. 
+Can sort by date watched, year released, and rating. All in ascending order.
+"""
 @app.route('/<sort>/archives', methods = ['GET'])
 def show_sort(sort):
     if sort == 'date_watched':
@@ -88,7 +109,7 @@ def show_sort(sort):
         movies_by_rating = collection.find({}).sort(sort, 1)
         return render_template('movies_rating.html', movie = movies_by_rating)
 
+
 if __name__ == "__main__":
 
-    #Start the app on port 5000, it will be different once hosted
     app.run(port=5000, debug=True)
